@@ -204,6 +204,16 @@ To configure chamber to use the S3 backend, set `CHAMBER_SECRET_BACKEND` to `S3`
 
 This feature is experimental, and not currently meant for production work.
 
+## Contributing
+
+* Install Go tools 1.7+ - (https://golang.org/doc/install)
+* Make sure $GOPATH is set correctly and $GOPATH/bin is added into $PATH
+* Clone this repo `git clone https://github.com/segmentio/chamber.git $GOPATH/src/github.com/segmentio/chamber`
+* Go to src `cd $GOPATH/src/github.com/segmentio/chamber`
+* Install vendor package management `make govendor`
+* Build with `make dist`
+* Clean with `make clean` before building again
+
 ## Releasing
 
 To cut a new release, just push a tag named `v<semver>` where `<semver>` is a
