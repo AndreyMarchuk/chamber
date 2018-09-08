@@ -207,5 +207,8 @@ This feature is experimental, and not currently meant for production work.
 ## Releasing
 
 To cut a new release, just push a tag named `v<semver>` where `<semver>` is a
-valid semver version.  This tag will be used by Circle to automatically publish
-a github release.
+valid semver version. 
+
+```
+GH_LOGIN="YOUR TOKEN" make release
+```
