@@ -36,7 +36,7 @@ func read(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "Failed to validate service")
 	}
 
-	key := strings.ToLower(args[1])
+	key := strings.ToUpper(args[1])
 	if err := validateKey(key); err != nil {
 		return errors.Wrap(err, "Failed to validate key")
 	}
