@@ -20,11 +20,11 @@ const (
 
 // validPathKeyFormat is the format that is expected for key names inside parameter store
 // when using paths
-var validPathKeyFormat = regexp.MustCompile(`^(\/[\w\.]+)*$`)
+var validPathKeyFormat = regexp.MustCompile(`^(\/[\w\.-]+)*$`)
 
 // validKeyFormat is the format that is expected for key names inside parameter store when
 // not using paths
-var validKeyFormat = regexp.MustCompile(`^[\w][\w\.]+[\w]$`)
+var validKeyFormat = regexp.MustCompile(`^[\w-][\w\.-]+[\w-]$`)
 
 // ensure SSMStore confirms to Store interface
 var _ Store = &SSMStore{}

@@ -12,9 +12,9 @@ import (
 
 // Regex's used to validate service and key names
 var (
-	validKeyFormat         = regexp.MustCompile(`^[\w\.]+$`)
-	validServiceFormat     = regexp.MustCompile(`^[\w]+(\.[\w]+)*$`)
-	validServicePathFormat = regexp.MustCompile(`^[\w]+(\/[\w\.]+)*$`)
+	validKeyFormat         = regexp.MustCompile(`^[\w\.-]+$`)
+	validServiceFormat     = regexp.MustCompile(`^[\w-]+(\.[\w-]+)*$`)
+	validServicePathFormat = regexp.MustCompile(`^[\w-]+(\/[\w\.-]+)*$`)
 
 	numRetries     int
 	chamberVersion string
