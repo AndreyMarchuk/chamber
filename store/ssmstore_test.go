@@ -725,6 +725,10 @@ func TestValidations(t *testing.T) {
 		"/foo.bar/foo",
 		"/foo/bar",
 		"/foo",
+		"/foo-bar",
+		"/foo-bar/foo-bar",
+		"/foo_bar",
+		"/foo_bar/foo_bar",
 	}
 
 	for _, k := range validPathFormat {
@@ -755,6 +759,9 @@ func TestValidations(t *testing.T) {
 	validNoPathFormat := []string{
 		"foo",
 		"foo.bar",
+		"foo_bar",
+		"foo-bar",
+		"foo-bar.foo",
 	}
 
 	for _, k := range validNoPathFormat {
