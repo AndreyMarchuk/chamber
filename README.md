@@ -5,6 +5,10 @@ secrets in SSM Parameter Store, an AWS service for storing secrets.
 
 For detailed info about using chamber, read [The Right Way To Manage Secrets](https://aws.amazon.com/blogs/mt/the-right-way-to-store-secrets-using-parameter-store/)
 
+## Customizations:
+- Service / key names casing is not adjusted (originally service name was lowercased and key name was uppercased)
+- Export and list commands are now recursive, which provides support for nested parameter groups for your app
+
 ## 2.0 Breaking Changes
 
 Starting with version 2.0, chamber uses parameter store's path based API by default.  Chamber pre-2.0 supported this API using the `CHAMBER_USE_PATHS` environment variable.  The paths based API has performance benefits and is the recommended best practice by AWS.
@@ -118,8 +122,8 @@ $ chamber exec <service...> -- <your executable>
 ```
 
 `exec` populates the environment with the secrets from the specified services
-and executes the given command.  Secret keys are converted to upper case (for
-example a secret with key `secret_key` will become `SECRET_KEY`).
+and executes the given command.  ~~Secret keys are converted to upper case (for
+example a secret with key `secret_key` will become `SECRET_KEY`).~~
 
 Secrets from services are loaded in the order specified in the command.  For
 example, if you do `chamber exec app apptwo -- ...` and both apps have a secret
