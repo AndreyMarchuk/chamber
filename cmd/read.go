@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"strings"
+	//"strings"
 	"text/tabwriter"
 
 	"github.com/pkg/errors"
@@ -31,12 +31,14 @@ func init() {
 }
 
 func read(cmd *cobra.Command, args []string) error {
-	service := strings.ToLower(args[0])
+	//service := strings.ToLower(args[0])
+	service := args[0]
 	if err := validateService(service); err != nil {
 		return errors.Wrap(err, "Failed to validate service")
 	}
 
-	key := strings.ToUpper(args[1])
+	//	key := strings.ToUpper(args[1])
+	key := args[1]
 	if err := validateKey(key); err != nil {
 		return errors.Wrap(err, "Failed to validate key")
 	}

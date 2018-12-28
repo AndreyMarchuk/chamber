@@ -256,8 +256,8 @@ func (s *SSMStore) List(service string, includeValues bool) ([]Secret, error) {
 				ParameterFilters: []*ssm.ParameterStringFilter{
 					{
 						Key:    aws.String("Path"),
-						Option: aws.String("OneLevel"),
-						Values: []*string{aws.String("/" + service)},
+						Option: aws.String("Recursive"),
+						Values: []*string{aws.String("/" + service + "/")},
 					},
 				},
 				MaxResults: aws.Int64(50),
@@ -341,6 +341,7 @@ func (s *SSMStore) ListRaw(service string) ([]RawSecret, error) {
 				NextToken:      nextToken,
 				Path:           aws.String("/" + service + "/"),
 				WithDecryption: aws.Bool(true),
+				Recursive:      aws.Bool(true),
 			}
 
 			resp, err := s.svc.GetParametersByPath(getParametersByPathInput)
@@ -366,6 +367,9 @@ func (s *SSMStore) ListRaw(service string) ([]RawSecret, error) {
 			}
 
 			for _, param := range resp.Parameters {
+
+				//fmt.Fprintf(os.Stderr, "%s\n", *param.Name)
+
 				if !s.validateName(*param.Name) {
 					continue
 				}

@@ -28,7 +28,8 @@ func init() {
 }
 
 func list(cmd *cobra.Command, args []string) error {
-	service := strings.ToLower(args[0])
+	//service := strings.ToLower(args[0])
+	service := args[0]
 	if err := validateService(service); err != nil {
 		return errors.Wrap(err, "Failed to validate service")
 	}
@@ -49,7 +50,7 @@ func list(cmd *cobra.Command, args []string) error {
 
 	for _, secret := range secrets {
 		fmt.Fprintf(w, "%s\t%d\t%s\t%s",
-			key(secret.Meta.Key),
+			keyfull(secret.Meta.Key, service),
 			secret.Meta.Version,
 			secret.Meta.Created.Local().Format(ShortTimeFormat),
 			secret.Meta.CreatedBy)
@@ -61,6 +62,11 @@ func list(cmd *cobra.Command, args []string) error {
 
 	w.Flush()
 	return nil
+}
+
+// return full key without servicename/namespace
+func keyfull(s string, service string) string {
+	return strings.Replace(s, "/"+service+"/", "", 1)
 }
 
 func key(s string) string {

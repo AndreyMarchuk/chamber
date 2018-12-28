@@ -49,7 +49,7 @@ func runExport(cmd *cobra.Command, args []string) error {
 			return errors.Wrapf(err, "Failed to list store contents for service %s", service)
 		}
 		for _, rawSecret := range rawSecrets {
-			k := key(rawSecret.Key)
+			k := keyfull(rawSecret.Key, service)
 			if _, ok := params[k]; ok {
 				fmt.Fprintf(os.Stderr, "warning: parameter %s specified more than once (overriden by service %s)\n", k, service)
 			}
@@ -95,7 +95,8 @@ func exportAsEnvFile(params map[string]string, w io.Writer) error {
 	// KEY=VAL
 	// OTHER=OTHERVAL
 	for _, k := range sortedKeys(params) {
-		key := strings.ToUpper(k)
+		//key := strings.ToUpper(k)
+		key := k
 		key = strings.Replace(key, "-", "_", -1)
 		w.Write([]byte(fmt.Sprintf("%s=%s\n", key, params[k])))
 	}
